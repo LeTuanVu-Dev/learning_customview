@@ -57,7 +57,9 @@ class SignaturePadView(context: Context, attrs: AttributeSet? = null) : View(con
             undonePaths.add(last)
             invalidate()
         }
+        // else: không làm gì nếu rỗng (tránh crash)
     }
+
 
     fun redo() {
         if (undonePaths.isNotEmpty()) {
@@ -65,7 +67,12 @@ class SignaturePadView(context: Context, attrs: AttributeSet? = null) : View(con
             paths.add(last)
             invalidate()
         }
+        // else: không làm gì nếu rỗng (tránh crash)
     }
+
+    fun canUndo(): Boolean = paths.isNotEmpty()
+    fun canRedo(): Boolean = undonePaths.isNotEmpty()
+
 
     fun clear() {
         paths.clear()
